@@ -1,8 +1,10 @@
-package com.example.trab2;
+package com.example.trab2.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.trab2.R;
 
 public class MainActivity extends AppCompatActivity {
 
