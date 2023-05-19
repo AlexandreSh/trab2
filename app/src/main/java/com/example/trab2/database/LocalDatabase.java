@@ -22,7 +22,7 @@ import com.example.trab2.entities.Curso;
         return INSTANCE;
     }
 
-    public abstract AlunoDao alunoModel();
-    public abstract CursoDao cursoModel();
-    public abstract AlunoCursoDao alunoCursoModel();
+    public abstract AlunoDao alunoNome();
+    public abstract CursoDao cursoNome();
+    public abstract AlunoCursoDao alunoCursoNome();
 }

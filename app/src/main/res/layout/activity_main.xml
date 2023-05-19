@@ -6,46 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".views.MainActivity">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
-        android:layout_width="150dp"
-        android:layout_height="90dp"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        tools:layout_editor_absoluteY="229dp">
-
-        <RadioButton
-            android:id="@+id/AlunoButtom"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="Aluno" />
-
-        <RadioButton
-            android:id="@+id/AdminButton"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:text="Administrador" />
-    </RadioGroup>
-
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toTopOf="@+id/radioGroup" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="175dp"
-        android:layout_height="45dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="@+id/radioGroup"
-        app:layout_constraintEnd_toEndOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/textView"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:layout_constraintVertical_bias="0.0" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
@@ -68,14 +28,25 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnAluno"
         android:layout_width="0dp"
         android:layout_height="90dp"
         android:layout_marginStart="75dp"
-        android:layout_marginTop="90dp"
         android:layout_marginEnd="75dp"
-        android:text="ENTRAR"
+        android:text="ALUNOS"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+        app:layout_constraintTop_toBottomOf="@+id/btnCursos" />
+
+    <Button
+        android:id="@+id/btnCursos"
+        android:layout_width="0dp"
+        android:layout_height="90dp"
+        android:layout_marginTop="208dp"
+        android:text="CURSOS"
+        app:layout_constraintEnd_toEndOf="@+id/btnAluno"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/btnAluno"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

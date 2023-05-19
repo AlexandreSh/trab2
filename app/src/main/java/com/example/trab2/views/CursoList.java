@@ -9,7 +9,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.trab2.R;
 import com.example.trab2.database.LocalDatabase;
 import com.example.trab2.databinding.ActivityCursoListBinding;
 import com.example.trab2.entities.Curso;
@@ -56,7 +55,7 @@ public class CursoList extends AppCompatActivity {
         preencheCursos();
     }
     private void preencheCursos(){
-        cursos = db.cursoModel().getAll();
+        cursos = db.cursoNome().getAll();
         ArrayAdapter<Curso> cursosAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cursos);
         listViewCursos.setAdapter(cursosAdapter);
         listViewCursos.setOnItemClickListener(new AdapterView.OnItemClickListener() {

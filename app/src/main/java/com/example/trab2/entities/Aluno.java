@@ -13,6 +13,14 @@ public class Aluno {
     private String emailAluno;
     private String telefoneAluno;
 
+    public Aluno(int alunoID, int cursoID, String nomeAluno, String emailAluno, String telefoneAluno){
+        this.alunoID = alunoID;
+        this.cursoID = cursoID;
+        this.emailAluno = emailAluno;
+        this.nomeAluno = nomeAluno;
+        this.telefoneAluno = telefoneAluno;
+    }
+    public Aluno(){}
     public int getAlunoID() {
         return alunoID;
     }

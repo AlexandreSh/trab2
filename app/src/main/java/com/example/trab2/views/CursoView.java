@@ -9,12 +9,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.trab2.R;
 import com.example.trab2.database.LocalDatabase;
 import com.example.trab2.databinding.ActivityCursoViewBinding;
 import com.example.trab2.entities.Curso;
-
-import java.sql.SQLClientInfoException;
 
 public class CursoView extends AppCompatActivity {
 
@@ -43,7 +40,7 @@ public class CursoView extends AppCompatActivity {
         }
     }
     private void getDBCurso(){
-        dbCurso=db.cursoModel().getCurso(dbCursoID);
+        dbCurso=db.cursoNome().getCurso(dbCursoID);
         binding.edtCurso.setText(dbCurso.getNomeCurso());
     }
 
@@ -56,10 +53,10 @@ public class CursoView extends AppCompatActivity {
         Curso thisCurso = new Curso(nomeCurso);
         if(dbCurso != null){
             thisCurso.setCursoID(dbCursoID);
-            db.cursoModel().update(thisCurso);
+            db.cursoNome().update(thisCurso);
             Toast.makeText(this, "Dados do Curso Atualizados.", Toast.LENGTH_SHORT).show();
         }else{
-            db.cursoModel().insertAll(thisCurso);
+            db.cursoNome().insertAll(thisCurso);
             Toast.makeText(this, "Curso Criado com Sucesso.", Toast.LENGTH_SHORT).show();
         }
         finish();
@@ -76,7 +73,7 @@ public class CursoView extends AppCompatActivity {
 
     private void excluir(){
         try{
-            db.cursoModel().delete(dbCurso);
+            db.cursoNome().delete(dbCurso);
             Toast.makeText(this, "Curso apagado!", Toast.LENGTH_SHORT).show();
         }catch (SQLiteConstraintException e) {
             Toast.makeText(this, "Apenas cursos sem alunos podem ser apagados!", Toast.LENGTH_SHORT).show();
