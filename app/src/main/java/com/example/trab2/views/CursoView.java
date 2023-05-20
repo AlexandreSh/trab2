@@ -21,7 +21,6 @@ public class CursoView extends AppCompatActivity {
     private int dbCursoID;
     private Curso dbCurso;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +29,7 @@ public class CursoView extends AppCompatActivity {
 
         db = LocalDatabase.getDatabase(getApplicationContext());
         dbCursoID = getIntent().getIntExtra("CURSO_SELECIONADO_ID", -1);
+        salvarCursoInicial();
     }
     protected void onResume(){
         super.onResume();
@@ -46,7 +46,7 @@ public class CursoView extends AppCompatActivity {
 
     public void salvarCurso(View view){
         String nomeCurso = binding.edtCurso.getText().toString();
-        if(nomeCurso.equals("")) {
+        if((nomeCurso.equals(""))||(nomeCurso.equals("Selecione um Curso"))) {
             Toast.makeText(this, "Adicione um Curso.", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -60,6 +60,16 @@ public class CursoView extends AppCompatActivity {
             Toast.makeText(this, "Curso Criado com Sucesso.", Toast.LENGTH_SHORT).show();
         }
         finish();
+    }
+    public void salvarCursoInicial(){
+        String nomeCurso = "Novo Curso";
+
+        Curso thisCurso = new Curso(nomeCurso);
+        if(db.cursoNome().getAll().size()<1) {
+            db.cursoNome().insertAll(thisCurso);
+            Toast.makeText(this, "Banco de Dados Inicializado", Toast.LENGTH_SHORT).show();
+        }
+       // finish();
     }
 
     public void excluiCurso(View view){

@@ -11,7 +11,7 @@ public class Curso {
 
     int qtdeHoras;
     public Curso() {  }
-    public Curso(String nome) { this.nomeCurso=nome; }
+    public Curso(String nomeCurso) { this.nomeCurso=nomeCurso; }
 
     public int getQtdeHoras() {
         return qtdeHoras;

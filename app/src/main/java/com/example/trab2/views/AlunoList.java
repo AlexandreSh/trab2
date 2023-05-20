@@ -36,6 +36,12 @@ public class AlunoList extends AppCompatActivity {
         binding.btnHomeAln.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                finish();
+            }
+        });
+        binding.btnAddAln.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 startActivity(new Intent(AlunoList.this, AlunoView.class));
             }
         });
@@ -51,10 +57,9 @@ public class AlunoList extends AppCompatActivity {
         alnCursos = db.alunoCursoNome().getAllAlunoCurso();
         ArrayAdapter<AlunoCurso> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alnCursos);
         listViewAluno.setAdapter(adapter);
-        listViewAluno.setAdapter(adapter);
         listViewAluno.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            //@Override?
+            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
                 AlunoCurso alunoSel = alnCursos.get(position);
                 edtIntent.putExtra("ALUNO_SELECIONADO_ID", alunoSel.getAlunoID());
                 startActivity(edtIntent);

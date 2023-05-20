@@ -51,24 +51,121 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:baselineAligned="false"
-            android:text="Aluno"
-            android:textSize="20sp" />
+            android:text="Nome"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <EditText
             android:id="@+id/edtAluno"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="10dp"
             android:ems="10"
-            android:hint='"edtAluno"'
+            android:hint='Nome do Aluno'
             android:inputType="textPersonName"
-            android:textSize="25sp" />
+            android:textSize="25sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:text="Email"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/edtEmailAluno"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint='Email do Aluno'
+            android:textSize="25sp"
+            android:visibility="visible"
+            tools:visibility="visible"
+            android:inputType="textEmailAddress" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:baselineAligned="false"
+            android:text="Telefone"
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <EditText
+            android:id="@+id/edtTelAluno"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="10dp"
+            android:ems="10"
+            android:hint='Telefone do Aluno'
+            android:inputType="phone"
+            android:textSize="25sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Curso"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:visibility="visible"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/txtNovoNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:baselineAligned="false"
+            android:text="Nome do novo curso"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <EditText
+            android:id="@+id/edtNomeNovoCurso"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint='Nome do novo curso'
+            android:inputType="textPersonName"
+            android:textSize="25sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtDuracao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:baselineAligned="false"
+            android:text="Duracao"
+            android:textSize="20sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
+
+        <EditText
+            android:id="@+id/edtDuracaoNovoCurso"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="5dp"
+            android:ems="10"
+            android:hint='Duracao do novo curso'
+            android:inputType="number"
+            android:textSize="25sp"
+            android:visibility="gone"
+            tools:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,14 +176,19 @@
             <Spinner
                 android:id="@+id/spnAlunos"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"></Spinner>
+                android:layout_height="50dp"
+                android:visibility="visible"
+                tools:visibility="visible"></Spinner>
+
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible"
+            tools:visibility="visible">
 
             <Button
                 android:id="@+id/btVoltar"
@@ -105,7 +207,7 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="5dp"
                 android:background="#E91E1E"
-                android:onClick="excluirCelular"
+                android:onClick="excluirAluno"
                 android:text="Excluir" />
 
             <Button
@@ -115,8 +217,11 @@
                 android:layout_marginLeft="5dp"
                 android:layout_marginRight="33dp"
                 android:background="#9EA9E8"
-                android:onClick="salvarCelular"
+                android:onClick="salvarAluno"
                 android:text="Salvar" />
         </LinearLayout>
+
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

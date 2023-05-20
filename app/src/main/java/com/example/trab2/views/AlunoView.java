@@ -1,11 +1,14 @@
 package com.example.trab2.views;
 
+import static java.lang.Integer.valueOf;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,8 +27,9 @@ public class AlunoView extends AppCompatActivity {
     private int dbAlunoID;
     private Aluno dbAluno;
     private List<Curso> cursos;
-    private Spinner spnAlunos;
-    private ArrayAdapter<Curso> cursoArrayAdapter;
+    private Spinner spnCursos;
+    private ArrayAdapter<Curso> cursoAdapter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +37,66 @@ public class AlunoView extends AppCompatActivity {
 
         binding = ActivityAlunoViewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        db=LocalDatabase.getDatabase(getApplicationContext());
 
-        spnAlunos = binding.spnAlunos;
+        spnCursos = binding.spnAlunos;
         dbAlunoID = getIntent().getIntExtra("ALUNO_SELECIONADO_ID", -1);
+        salvarCursoInicial();
+        binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+        binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+        binding.txtDuracao.setVisibility(View.VISIBLE);
+        binding.txtNovoNome.setVisibility(View.VISIBLE);
+        binding.spnAlunos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==1){
+                    binding.edtNomeNovoCurso.setVisibility(View.GONE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.GONE);
+                    binding.txtDuracao.setVisibility(View.GONE);
+                    binding.txtNovoNome.setVisibility(View.GONE);
+                }else{
+                    binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                    binding.txtDuracao.setVisibility(View.VISIBLE);
+                    binding.txtNovoNome.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                binding.txtDuracao.setVisibility(View.VISIBLE);
+                binding.txtNovoNome.setVisibility(View.VISIBLE);
+            }
+        });
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        binding.spnAlunos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==1){
+                    binding.edtNomeNovoCurso.setVisibility(View.GONE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.GONE);
+                    binding.txtDuracao.setVisibility(View.GONE);
+                    binding.txtNovoNome.setVisibility(View.GONE);
+                }else{
+                    binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                    binding.txtDuracao.setVisibility(View.VISIBLE);
+                    binding.txtNovoNome.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                binding.txtDuracao.setVisibility(View.VISIBLE);
+                binding.txtNovoNome.setVisibility(View.VISIBLE);
+            }
+        });
         if(dbAlunoID >=0){
             preencheAluno();
         }else{
@@ -56,30 +112,89 @@ public class AlunoView extends AppCompatActivity {
 
     private void preencheCursos(){
         cursos=db.cursoNome().getAll();
-        cursoArrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cursos);
-        spnAlunos.setAdapter(cursoArrayAdapter);
+        cursoAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, cursos);
+        spnCursos.setAdapter(cursoAdapter);
         if(dbAluno!=null){
-            spnAlunos.setSelection(dbAluno.getCursoID() -1);
+            spnCursos.setSelection(dbAluno.getCursoID() -1);
         }
     }
 
+
     public void salvarAluno(View view){
+        binding.spnAlunos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if(position==1){
+                    binding.edtNomeNovoCurso.setVisibility(View.GONE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.GONE);
+                    binding.txtDuracao.setVisibility(View.GONE);
+                    binding.txtNovoNome.setVisibility(View.GONE);
+                }else{
+                    binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                    binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                    binding.txtDuracao.setVisibility(View.VISIBLE);
+                    binding.txtNovoNome.setVisibility(View.VISIBLE);
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                binding.edtNomeNovoCurso.setVisibility(View.VISIBLE);
+                binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                binding.txtDuracao.setVisibility(View.VISIBLE);
+                binding.txtNovoNome.setVisibility(View.VISIBLE);
+            }
+        });
         String alunoNome = binding.edtAluno.getText().toString();
+        String alunoMail = binding.edtEmailAluno.getText().toString();
+        String alunoFone = binding.edtTelAluno.getText().toString();
         String novoCurso = "";
-        if(spnAlunos.getSelectedItem() != null){
-            novoCurso = spnAlunos.getSelectedItem().toString();
+        String NovoCursoNome = binding.edtNomeNovoCurso.getText().toString();
+        int NovoCursoDura = valueOf(binding.edtDuracaoNovoCurso.getText().toString());
+
+        if(spnCursos.getSelectedItem() != null){
+            novoCurso = spnCursos.getSelectedItem().toString();
+            if (spnCursos.getSelectedItemId() == 1) {
+                binding.spnAlunos.setVisibility(View.VISIBLE);
+                binding.edtDuracaoNovoCurso.setVisibility(View.VISIBLE);
+                binding.txtDuracao.setVisibility(View.VISIBLE);
+                binding.txtNovoNome.setVisibility(View.VISIBLE);
+            }else{
+                binding.spnAlunos.setVisibility(View.GONE);
+                binding.edtDuracaoNovoCurso.setVisibility(View.GONE);
+                binding.txtDuracao.setVisibility(View.GONE);
+                binding.txtNovoNome.setVisibility(View.GONE);
+            }
         }
         if(alunoNome.equals("")){
             Toast.makeText(this, "Insira o nome do aluno", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(alunoMail.equals("")){
+            Toast.makeText(this, "Insira o email do aluno", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(alunoFone.equals("")){
+            Toast.makeText(this, "Insira o telefone do aluno", Toast.LENGTH_SHORT).show();
             return;
         }
         if(novoCurso.equals("")){
             Toast.makeText(this, "Insira o nome do curso", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(novoCurso.equals("Novo Curso")){
+            Toast.makeText(this, "Insira o nome do curso", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(NovoCursoDura == valueOf("")){
+            Toast.makeText(this, "Insira a duracao do curso", Toast.LENGTH_SHORT).show();
+            return;
+        }
         Aluno novoAluno = new Aluno();
         novoAluno.setNomeAluno(alunoNome);
-        novoAluno.setCursoID(cursos.get(spnAlunos.getSelectedItemPosition()).getCursoID());
+        novoAluno.setEmailAluno(alunoMail);
+        novoAluno.setTelefoneAluno(alunoFone);
+        novoAluno.setAlunoID(Integer.parseInt(alunoFone));
+        novoAluno.setCursoID(cursos.get(spnCursos.getSelectedItemPosition()).getCursoID());
         if (dbAluno !=null){
             novoAluno.setAlunoID((dbAlunoID));
             db.alunoNome().update(novoAluno);
@@ -103,6 +218,17 @@ public class AlunoView extends AppCompatActivity {
         db.alunoNome().delete(dbAluno);
         Toast.makeText(this, "Cadastro Apagado!", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    public void salvarCursoInicial(){
+        String nomeCurso = "Novo Curso";
+
+        Curso thisCurso = new Curso(nomeCurso);
+        if(db.cursoNome().getAll().size()<1) {
+            db.cursoNome().insertAll(thisCurso);
+            Toast.makeText(this, "Banco de Dados Inicializado", Toast.LENGTH_SHORT).show();
+        }
+     //   finish();
     }
     public void voltar(View view) {
         finish();

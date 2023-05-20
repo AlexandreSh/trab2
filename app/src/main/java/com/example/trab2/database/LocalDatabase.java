@@ -13,7 +13,7 @@ import com.example.trab2.entities.Aluno;
 import com.example.trab2.entities.Curso;
 
 @Database(entities = {Curso.class, Aluno.class}, version = 2)
-    public abstract class LocalDatabase extends RoomDatabase{
+public abstract class LocalDatabase extends RoomDatabase{
     private static LocalDatabase INSTANCE;
     public static LocalDatabase getDatabase(Context context){
         if(INSTANCE == null){

@@ -16,6 +16,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+  //      CursoView.salvarCursoInicial();
         binding.btnAluno.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
