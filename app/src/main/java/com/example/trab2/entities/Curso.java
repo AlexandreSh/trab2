@@ -3,6 +3,8 @@ package com.example.trab2.entities;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.trab2.dao.CursoDao;
+
 @Entity
 public class Curso {
     @PrimaryKey(autoGenerate = true)
@@ -34,6 +36,7 @@ public class Curso {
     public void setCursoID(int cursoID) {
         this.cursoID = cursoID;
     }
+
 
     @Override
     public String toString() {

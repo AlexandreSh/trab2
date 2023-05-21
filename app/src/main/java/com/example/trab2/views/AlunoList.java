@@ -8,10 +8,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Spinner;
 
-import com.example.trab2.R;
-import com.example.trab2.database.LocalDatabase;
+import com.example.trab2.database.CursosOnline;
 import com.example.trab2.databinding.ActivityAlunoListBinding;
 import com.example.trab2.entities.AlunoCurso;
 
@@ -19,7 +17,7 @@ import java.util.List;
 
 public class AlunoList extends AppCompatActivity {
     private ActivityAlunoListBinding binding;
-    private LocalDatabase db;
+    private CursosOnline db;
     private List<AlunoCurso> alnCursos;
     private ListView  listViewAluno;
     private Intent edtIntent;
@@ -30,7 +28,7 @@ public class AlunoList extends AppCompatActivity {
         binding = ActivityAlunoListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = LocalDatabase.getDatabase(getApplicationContext());
+        db = CursosOnline.getDatabase(getApplicationContext());
         listViewAluno = binding.listAluno;
 
         binding.btnHomeAln.setOnClickListener(new View.OnClickListener() {
@@ -45,6 +43,8 @@ public class AlunoList extends AppCompatActivity {
                 startActivity(new Intent(AlunoList.this, AlunoView.class));
             }
         });
+        preencheAlunos();
+
     }
 
     @Override
@@ -58,12 +58,14 @@ public class AlunoList extends AppCompatActivity {
         ArrayAdapter<AlunoCurso> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alnCursos);
         listViewAluno.setAdapter(adapter);
         listViewAluno.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            //@Override?
-            public void onItemClick(AdapterView<?> adapter, View view, int position, long id) {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 AlunoCurso alunoSel = alnCursos.get(position);
                 edtIntent.putExtra("ALUNO_SELECIONADO_ID", alunoSel.getAlunoID());
                 startActivity(edtIntent);
             }
         });
+
+
     }
 }

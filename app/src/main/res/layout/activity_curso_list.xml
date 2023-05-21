@@ -61,8 +61,8 @@
         android:id="@+id/btnCheckCurso"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:contentDescription='"Accept Button"'
-        android:src="@drawable/baseline_check_24"
+        android:contentDescription='Novo curso'
+        android:src="@drawable/baseline_playlist_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/btnHomeCurso"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline4"

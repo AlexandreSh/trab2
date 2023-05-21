@@ -1,5 +1,6 @@
 package com.example.trab2.dao;
 
+import androidx.lifecycle.MutableLiveData;
 import androidx.room.Dao;
 import androidx.room.Delete;
 import androidx.room.Insert;
@@ -17,6 +18,9 @@ public interface CursoDao {
 
     @Query("SELECT * FROM Curso")
     List<Curso> getAll();
+
+    @Query("SELECT COUNT(*) FROM Curso")
+    Integer countCursos();
 
     @Insert
     void insertAll(Curso... curso);

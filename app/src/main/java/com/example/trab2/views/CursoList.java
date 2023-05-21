@@ -9,7 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-import com.example.trab2.database.LocalDatabase;
+import com.example.trab2.database.CursosOnline;
 import com.example.trab2.databinding.ActivityCursoListBinding;
 import com.example.trab2.entities.Curso;
 
@@ -18,7 +18,7 @@ import java.util.List;
 public class CursoList extends AppCompatActivity {
 
     private ActivityCursoListBinding binding;
-    private LocalDatabase db;
+    private CursosOnline db;
     private List<Curso> cursos;
     private ListView listViewCursos;
     private Intent edtIntent;
@@ -32,7 +32,7 @@ public class CursoList extends AppCompatActivity {
         binding = ActivityCursoListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        db = LocalDatabase.getDatabase(getApplicationContext());
+        db = CursosOnline.getDatabase(getApplicationContext());
         listViewCursos = binding.listViewCursos;
 
         binding.btnHomeCurso.setOnClickListener(new View.OnClickListener() {
