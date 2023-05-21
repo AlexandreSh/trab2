@@ -37,7 +37,6 @@ public class Curso {
         this.cursoID = cursoID;
     }
 
-
     @Override
     public String toString() {
         return this.cursoID + ": " + getNomeCurso() + " - " + getQtdeHoras() + " horas";

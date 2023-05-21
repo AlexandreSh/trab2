@@ -65,7 +65,5 @@ public class AlunoList extends AppCompatActivity {
                 startActivity(edtIntent);
             }
         });
-
-
     }
 }

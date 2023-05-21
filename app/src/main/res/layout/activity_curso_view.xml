@@ -121,8 +121,8 @@
                 android:adjustViewBounds="false"
                 android:background="@android:color/transparent"
                 android:contentDescription='"Botao Salvar"'
-                android:onClick="salvarCurso"
                 android:src="@drawable/baseline_save_as_24" />
+            <!--    android:onClick="salvarCurso" -->
         </LinearLayout>
 
     </LinearLayout>

@@ -3,8 +3,6 @@ package com.example.trab2.views;
 import static android.R.layout.simple_list_item_1;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.Observer;
-import androidx.recyclerview.widget.ListAdapter;
 
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -13,13 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.example.trab2.dao.CursoDao;
 import com.example.trab2.database.CursosOnline;
 import com.example.trab2.databinding.ActivityCursoViewBinding;
-import com.example.trab2.entities.Aluno;
 import com.example.trab2.entities.AlunoCurso;
 import com.example.trab2.entities.Curso;
 
@@ -35,11 +32,12 @@ public class CursoView extends AppCompatActivity {
 
     private ArrayAdapter<AlunoCurso> alnAdapter;
 
-    private int duracao;
+  //  private int duracao;
     private List<AlunoCurso> alunos;
     private ListView listViewAlnCurso;
     private Intent edtIntent;
 
+    private ImageButton btnSalvar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +46,14 @@ public class CursoView extends AppCompatActivity {
 
         db = CursosOnline.getDatabase(getApplicationContext());
         dbCursoID = getIntent().getIntExtra("CURSO_SELECIONADO_ID", -1);
-        preencheAlunosCurso();
+        btnSalvar = binding.btnSalvarCurso;
+        btnSalvar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                salvarCurso(v);
+            }
+        });
+  //      preencheAlunosCurso();
 //        salvarCursoInicial();
 //        listViewAlnCurso = binding.listAlns;
 //        if (listViewAlnCurso.getCount()>6) {
@@ -58,7 +63,7 @@ public class CursoView extends AppCompatActivity {
     }
     protected void onResume(){
         super.onResume();
-        preencheAlunosCurso();
+   //     preencheAlunosCurso();
         if (dbCursoID>=0){
             getDBCurso();
         }else{
@@ -72,13 +77,18 @@ public class CursoView extends AppCompatActivity {
 
     public void salvarCurso(View view){
         String nomeCurso = binding.edtNomCurso.getText().toString();
+        String tempoCurso = binding.edtTempoCurso.getText().toString();
         int cursoCount;
         cursoCount = db.cursoNome().countCursos();
-        if((nomeCurso.equals(""))||(nomeCurso.equals("Selecione um Curso"))) {
-            Toast.makeText(this, "Adicione um Curso.", Toast.LENGTH_SHORT).show();
+        if(nomeCurso.equals("")) {
+            Toast.makeText(this, "Defina o nome do curso.", Toast.LENGTH_SHORT).show();
             return;
         }
-        duracao = Integer.parseInt(binding.edtTempoCurso.toString());
+        if(tempoCurso.equals("")) {
+            Toast.makeText(this, "Defina a duraçao do curso.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int duracao = Integer.valueOf(tempoCurso);
         Curso thisCurso = new Curso(nomeCurso);
         if(dbCurso != null){
             thisCurso.setCursoID(dbCursoID);
@@ -86,9 +96,10 @@ public class CursoView extends AppCompatActivity {
             db.cursoNome().update(thisCurso);
             Toast.makeText(this, "Dados do Curso Atualizados.", Toast.LENGTH_SHORT).show();
         }else{
-            db.cursoNome().insertAll(thisCurso);
+            thisCurso.setNomeCurso(nomeCurso);
             thisCurso.setQtdeHoras(duracao);
             thisCurso.setCursoID(cursoCount+1);
+            db.cursoNome().insertAll(thisCurso);
             Toast.makeText(this, "Curso Criado com Sucesso.", Toast.LENGTH_SHORT).show();
         }
         finish();

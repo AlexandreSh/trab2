@@ -13,9 +13,7 @@ public class Aluno {
     private String emailAluno;
     private String telefoneAluno;
 
-    public Aluno(){
-
-    }
+    public Aluno(){    }
     public Aluno(int alunoID, int cursoID, String nomeAluno, String emailAluno, String telefoneAluno){
         this.alunoID = alunoID;
         this.cursoID = cursoID;

@@ -159,7 +159,10 @@ public class AlunoView extends AppCompatActivity {
         String alunoNome = binding.edtAluno.getText().toString();
         String alunoMail = binding.edtEmailAluno.getText().toString();
         String alunoFone = binding.edtTelAluno.getText().toString();
-//        String novoCurso = "";
+        String novoCurso = "";
+        if(spnCursos.getSelectedItem() != null){
+            novoCurso = spnCursos.getSelectedItem().toString();
+        }
 //        String NovoCursoNome = binding.edtNomeNovoCurso.getText().toString();
 //        int NovoCursoDura = valueOf(binding.edtDuracaoNovoCurso.getText().toString());
 
@@ -190,10 +193,10 @@ public class AlunoView extends AppCompatActivity {
             Toast.makeText(this, "Insira o telefone do aluno", Toast.LENGTH_SHORT).show();
             return;
         }
-//        if(novoCurso.equals("")&&(sel<2)){
-//            Toast.makeText(this, "Insira o nome do curso", Toast.LENGTH_SHORT).show();
-//            return;
-//        }
+        if(novoCurso.equals("")){
+            Toast.makeText(this, "Insira o nome do curso", Toast.LENGTH_SHORT).show();
+            return;
+        }
 //        if(novoCurso.equals("Novo Curso")&&(sel<2)){
 //            Toast.makeText(this, "Insira o nome do curso", Toast.LENGTH_SHORT).show();
 //            return;
@@ -213,6 +216,7 @@ public class AlunoView extends AppCompatActivity {
             db.alunoNome().update(novoAluno);
             Toast.makeText(this, "Cadastro atualizado!", Toast.LENGTH_SHORT).show();
         }else{
+            novoAluno.setAlunoID(Integer.parseInt(alunoFone));
             db.alunoNome().insertAll(novoAluno);
             Toast.makeText(this, "Aluno cadastrado!", Toast.LENGTH_SHORT).show();
         }
@@ -233,16 +237,16 @@ public class AlunoView extends AppCompatActivity {
         finish();
     }
 
-    public void salvarCursoInicial(){
-        String nomeCurso = "Novo Curso";
-
-        Curso thisCurso = new Curso(nomeCurso);
-        if(db.cursoNome().getAll().size()<1) {
-            db.cursoNome().insertAll(thisCurso);
-            Toast.makeText(this, "Banco de Dados Inicializado", Toast.LENGTH_SHORT).show();
-        }
-     //   finish();
-    }
+//    public void salvarCursoInicial(){
+//        String nomeCurso = "Novo Curso";
+//
+//        Curso thisCurso = new Curso(nomeCurso);
+//        if(db.cursoNome().getAll().size()<1) {
+//            db.cursoNome().insertAll(thisCurso);
+//            Toast.makeText(this, "Banco de Dados Inicializado", Toast.LENGTH_SHORT).show();
+//        }
+//     //   finish();
+//    }
     public void voltar(View view) {
         finish();
     }
