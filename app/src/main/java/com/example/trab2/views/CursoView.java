@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.trab2.database.CursosOnline;
 import com.example.trab2.databinding.ActivityCursoViewBinding;
+import com.example.trab2.entities.Aluno;
 import com.example.trab2.entities.AlunoCurso;
 import com.example.trab2.entities.Curso;
 
@@ -28,14 +29,15 @@ public class CursoView extends AppCompatActivity {
     private CursosOnline db;
     private ActivityCursoViewBinding binding;
     private int dbCursoID;
+    private int cursoID;
     private Curso dbCurso;
 
     private ArrayAdapter<AlunoCurso> alnAdapter;
 
   //  private int duracao;
-    private List<AlunoCurso> alunos;
+    private List<Aluno> alunos;
     private ListView listViewAlnCurso;
-    private Intent edtIntent;
+    private Intent edtIntent,edtIntent2;
 
     private ImageButton btnSalvar;
     @Override
@@ -53,19 +55,20 @@ public class CursoView extends AppCompatActivity {
                 salvarCurso(v);
             }
         });
-  //      preencheAlunosCurso();
 //        salvarCursoInicial();
-//        listViewAlnCurso = binding.listAlns;
+        listViewAlnCurso = binding.listAlns;
+        preencheAlunosCurso();
 //        if (listViewAlnCurso.getCount()>6) {
 //            View lst = listViewAlnCurso.getView
 //
 //        }
     }
     protected void onResume(){
+        edtIntent2 = new Intent(this, AlunoView.class);
         super.onResume();
-   //     preencheAlunosCurso();
         if (dbCursoID>=0){
             getDBCurso();
+            preencheAlunosCurso();
         }else{
             binding.btnExcluirCurso.setVisibility(View.GONE);
         }
@@ -73,6 +76,7 @@ public class CursoView extends AppCompatActivity {
     private void getDBCurso(){
         dbCurso=db.cursoNome().getCurso(dbCursoID);
         binding.edtNomCurso.setText(dbCurso.getNomeCurso());
+        binding.edtTempoCurso.setText(String.valueOf(dbCurso.getQtdeHoras()));
     }
 
     public void salvarCurso(View view){
@@ -104,18 +108,24 @@ public class CursoView extends AppCompatActivity {
         }
         finish();
     }
-    private void preencheAlunosCurso(){
-        alunos = db.alunoCursoNome().getAllAlunoCurso();
-        ArrayAdapter<AlunoCurso> cursosAdapter = new ArrayAdapter<>(this, simple_list_item_1, alunos);
-        listViewAlnCurso.setAdapter(cursosAdapter);
-        listViewAlnCurso.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlunoCurso alunoSel = alunos.get(position);
-                edtIntent.putExtra("ALUNO_SELECIONADO_ID", alunoSel.getAlunoID());
-                startActivity(edtIntent);
+    public void preencheAlunosCurso(){
+        int cursoCount= (Integer)db.cursoNome().countCursos();
+        //Toast.makeText(this, "cursoid = " + dbCursoID, Toast.LENGTH_LONG).show();
+        if ((cursoCount>0)&&(dbCursoID>0)) {
+            alunos = db.alunoNome().getAllCurso(dbCursoID);
+            if (alunos != null) {
+                ArrayAdapter<Aluno> cursosAdapter = new ArrayAdapter<>(this, simple_list_item_1, alunos);
+                listViewAlnCurso.setAdapter(cursosAdapter);
+                listViewAlnCurso.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Aluno alunoSel = alunos.get(position);
+                        edtIntent2.putExtra("ALUNO_SELECIONADO_ID", alunoSel.getAlunoID());
+                        startActivity(edtIntent2);
+                    }
+                });
             }
-        });
+        }
     }
     public void salvarCursoInicial(){
         String nomeCurso = "Novo Curso";
@@ -129,7 +139,12 @@ public class CursoView extends AppCompatActivity {
     }
 
     public void excluiCurso(View view){
-        new AlertDialog.Builder(this).setTitle("Deletando Curso").setMessage("Confirma a Exclusao do Curso?").setPositiveButton("Confirmo", (dialog, which) -> excluir()).setNegativeButton("Cancelar!", null).show();
+        int numAln = db.alunoNome().countAlunosCurso(dbCurso.getCursoID());
+        if (numAln>0){
+            new AlertDialog.Builder(this).setTitle("Deletando Curso COM ALUNOS").setMessage("Confirma a exclusao do curso com " + numAln + " alunos?" +"\n AVISO: \n os " + numAln + " alunos tambem serao apagados!").setPositiveButton("Confirmo", (dialog, which) -> excluir()).setNegativeButton("Cancelar!", null).show();
+        }else {
+            new AlertDialog.Builder(this).setTitle("Deletando Curso").setMessage("Confirma a Exclusao do Curso?").setPositiveButton("Confirmo", (dialog, which) -> excluir()).setNegativeButton("Cancelar!", null).show();
+        }
     }
 
     private void excluir(){

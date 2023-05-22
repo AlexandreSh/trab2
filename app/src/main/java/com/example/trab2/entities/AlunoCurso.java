@@ -2,7 +2,7 @@ package com.example.trab2.entities;
 
 public class AlunoCurso {
     public int alunoID;
-    public String AlunoCurso;
+    public String alunoNome;
     public String cursoNome;
 
     public int getAlunoID(){
@@ -10,7 +10,7 @@ public class AlunoCurso {
     }
     @Override
     public String toString(){
-        return this.alunoID + ": " + AlunoCurso;
+        return this.alunoID + ": " + alunoNome + " - " + cursoNome;
     }
 
 }

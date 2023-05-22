@@ -4,6 +4,8 @@ import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 
+import com.example.trab2.database.CursosOnline;
+
 @Entity(foreignKeys = @ForeignKey(entity = Curso.class, parentColumns = "cursoID", childColumns = "cursoID", onDelete = ForeignKey.CASCADE))
 public class Aluno {
     @PrimaryKey(autoGenerate = true)
@@ -12,11 +14,16 @@ public class Aluno {
     private String nomeAluno;
     private String emailAluno;
     private String telefoneAluno;
+    private String cursoNome;
 
     public Aluno(){    }
-    public Aluno(int alunoID, int cursoID, String nomeAluno, String emailAluno, String telefoneAluno){
+
+
+
+    public Aluno(int alunoID, int cursoID, String nomeAluno, String emailAluno, String telefoneAluno, String cursoNome){
         this.alunoID = alunoID;
         this.cursoID = cursoID;
+        this.cursoNome = cursoNome;
         this.emailAluno = emailAluno;
         this.nomeAluno = nomeAluno;
         this.telefoneAluno = telefoneAluno;
@@ -56,14 +63,10 @@ public class Aluno {
         this.telefoneAluno = telefoneAluno;
     }
 
+    public String getCursoNome() { return cursoNome; }
+    public void setCursoNome(String cursoNome) { this.cursoNome = cursoNome;}
     @Override
     public String toString() {
-        return "Aluno{" +
-                "alunoID=" + alunoID +
-                ", cursoID=" + cursoID +
-                ", nomeAluno='" + nomeAluno + '\'' +
-                ", emailAluno='" + emailAluno + '\'' +
-                ", telefoneAluno='" + telefoneAluno + '\'' +
-                '}';
+        return alunoID + ": " +nomeAluno + " - " + getCursoNome();
     }
 }

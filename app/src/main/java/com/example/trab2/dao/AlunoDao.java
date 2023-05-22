@@ -9,11 +9,26 @@ import androidx.room.Update;
 import com.example.trab2.entities.Aluno;
 
 import com.example.trab2.entities.Aluno;
+import com.example.trab2.entities.Curso;
+
+import java.util.List;
 
 @Dao
 public interface AlunoDao {
     @Query("SELECT * FROM Aluno WHERE alunoID = :id LIMIT 1")
     Aluno getID(int id);
+
+    @Query("SELECT * FROM Aluno")
+    List<Aluno> getAll();
+
+    @Query("SELECT * FROM Aluno WHERE cursoID = :idc ")
+    List<Aluno> getAllCurso(int idc);
+    @Query("SELECT COUNT(*) FROM Aluno")
+    Integer countAlunos();
+    @Query("SELECT COUNT(*) FROM Aluno WHERE cursoID = :idc")
+    Integer countAlunosCurso(int idc);
+
+
 
     @Update
     void update(Aluno aluno);

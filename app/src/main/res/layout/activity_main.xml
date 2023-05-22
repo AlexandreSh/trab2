@@ -17,48 +17,53 @@
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:layout_marginBottom="731dp"
+        android:layout_marginEnd="20dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline3"
         app:layout_constraintGuide_begin="24dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/btnAluno"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginStart="75dp"
-        android:layout_marginEnd="75dp"
-        android:text="ALUNOS"
+        android:layout_height="0dp"
+        android:layout_marginTop="64dp"
+        android:layout_marginBottom="180dp"
+        android:background="#E6E9FB"
+        android:gravity="center"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/btnCursos" />
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline3"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <Button
-        android:id="@+id/btnCursos"
-        android:layout_width="0dp"
-        android:layout_height="90dp"
-        android:layout_marginTop="208dp"
-        android:text="CURSOS"
-        app:layout_constraintEnd_toEndOf="@+id/btnAluno"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/btnAluno"
-        app:layout_constraintTop_toTopOf="parent" />
+        <Button
+            android:id="@+id/btnCursos"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginTop="0dp"
+            android:text="CURSOS" />
 
-    <TextView
-        android:id="@+id/countView"
-        android:layout_width="0dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="20dp"
-        android:text="TextView"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="@+id/btnCursos"
-        app:layout_constraintStart_toStartOf="@+id/btnCursos"
-        app:layout_constraintTop_toBottomOf="@+id/btnCursos" />
+        <TextView
+            android:id="@+id/countView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="100dp"
+            android:text="TextView"
+            android:textSize="20sp" />
+
+        <Button
+            android:id="@+id/btnAluno"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:layout_marginEnd="0dp"
+            android:layout_weight="0"
+            android:text="ALUNOS" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

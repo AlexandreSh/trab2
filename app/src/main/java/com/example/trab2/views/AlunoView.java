@@ -8,8 +8,10 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.PhoneNumberFormattingTextWatcher;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -29,6 +31,7 @@ public class AlunoView extends AppCompatActivity {
     private Aluno dbAluno;
     private List<Curso> cursos;
     private Spinner spnCursos;
+    private String validaEmail = null;
     private ArrayAdapter<Curso> cursoAdapter;
     private Curso selCurso;
     private int sel = 1;
@@ -119,6 +122,8 @@ public class AlunoView extends AppCompatActivity {
     private void preencheAluno(){
         dbAluno = db.alunoNome().getID(dbAlunoID);
         binding.edtAluno.setText(dbAluno.getNomeAluno());
+        binding.edtEmailAluno.setText(dbAluno.getEmailAluno());
+        binding.edtTelAluno.setText(dbAluno.getTelefoneAluno());
     }
 
     private void preencheCursos(){
@@ -129,8 +134,18 @@ public class AlunoView extends AppCompatActivity {
             spnCursos.setSelection(dbAluno.getCursoID() -1);
         }
     }
-
-
+    public void VerificaEmail(String edt) {
+        if (edt== null) {
+            validaEmail = null;
+        } else if (!validaEmail(edt)) {
+            validaEmail = null;
+        } else {
+            validaEmail = edt;
+        }
+    }
+    boolean validaEmail(CharSequence email) {
+        return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
+    }
     public void salvarAluno(View view){
 //        binding.spnAlunos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 //            @Override
@@ -160,6 +175,15 @@ public class AlunoView extends AppCompatActivity {
         String alunoMail = binding.edtEmailAluno.getText().toString();
         String alunoFone = binding.edtTelAluno.getText().toString();
         String novoCurso = "";
+//        binding.edtTelAluno.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+//        binding.edtEmailAluno.addTextChangedListener(new TextWatcher() {
+//            @Override
+//            public void beforeTextChanged(CharSequence s, int start, int count, int after) {   }
+//            @Override
+//            public void onTextChanged(CharSequence s, int start, int before, int count) {  }
+//            @Override
+//            public void afterTextChanged(Editable s) {  VerificaEmail(alunoMail);     }
+//        });
         if(spnCursos.getSelectedItem() != null){
             novoCurso = spnCursos.getSelectedItem().toString();
         }
@@ -189,6 +213,11 @@ public class AlunoView extends AppCompatActivity {
             Toast.makeText(this, "Insira o email do aluno", Toast.LENGTH_SHORT).show();
             return;
         }
+        //AMAIS
+//        if(validaEmail.equals("")){
+//            Toast.makeText(this, "Insira o email do aluno", Toast.LENGTH_SHORT).show();
+//            return;
+//        }
         if(alunoFone.equals("")){
             Toast.makeText(this, "Insira o telefone do aluno", Toast.LENGTH_SHORT).show();
             return;
@@ -211,6 +240,7 @@ public class AlunoView extends AppCompatActivity {
         novoAluno.setTelefoneAluno(alunoFone);
      //   novoAluno.setAlunoID(Integer.parseInt(alunoFone));
         novoAluno.setCursoID(cursos.get(spnCursos.getSelectedItemPosition()).getCursoID());
+        novoAluno.setCursoNome(cursos.get(spnCursos.getSelectedItemPosition()).getNomeCurso());
         if (dbAluno !=null){
             novoAluno.setAlunoID((dbAlunoID));
             db.alunoNome().update(novoAluno);

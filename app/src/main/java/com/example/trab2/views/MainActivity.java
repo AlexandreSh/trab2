@@ -57,11 +57,13 @@ public class MainActivity extends AppCompatActivity {
         db = CursosOnline.getDatabase(getApplicationContext());
         int cursoCount;
         cursoCount = (Integer)db.cursoNome().countCursos();
+        int alunoCount;
+        alunoCount = (Integer)db.alunoNome().countAlunos();
         if (cursoCount <1) {
             binding.countView.setVisibility(View.GONE);
         }else{
             binding.countView.setVisibility(View.VISIBLE);
-            binding.countView.setText("Cursos cadastrados: "+cursoCount);
+            binding.countView.setText("Cursos cadastrados: "+cursoCount +"\n"+ "Alunos cadastrados: "+alunoCount);
         }
         binding.btnAluno.setOnClickListener(new View.OnClickListener() {
             @Override

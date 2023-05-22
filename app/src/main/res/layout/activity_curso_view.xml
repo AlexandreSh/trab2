@@ -39,6 +39,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
+        android:background="#FFE7FD"
         app:layout_constraintTop_toTopOf="parent">
 
 
@@ -110,7 +111,7 @@
                 android:background="@android:color/transparent"
                 android:contentDescription='"Botao Excluir Curso"'
                 android:onClick="excluiCurso"
-                android:src="@drawable/baseline_folder_delete_24" />
+                android:src="@drawable/baseline_delete_forever_24" />
 
             <ImageButton
                 android:id="@+id/btnSalvarCurso"

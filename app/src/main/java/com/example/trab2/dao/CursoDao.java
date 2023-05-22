@@ -19,6 +19,7 @@ public interface CursoDao {
     @Query("SELECT * FROM Curso")
     List<Curso> getAll();
 
+
     @Query("SELECT COUNT(*) FROM Curso")
     Integer countCursos();
 

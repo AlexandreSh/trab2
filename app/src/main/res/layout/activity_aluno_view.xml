@@ -39,6 +39,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="1dp"
         android:background="#E6E9FB"
+        android:gravity="top"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
@@ -86,10 +87,10 @@
             android:layout_marginBottom="10dp"
             android:ems="10"
             android:hint='Email do Aluno'
+            android:inputType="textEmailAddress"
             android:textSize="25sp"
             android:visibility="visible"
-            tools:visibility="visible"
-            android:inputType="textEmailAddress" />
+            tools:visibility="visible" />
 
         <TextView
             android:layout_width="match_parent"
@@ -116,6 +117,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:gravity="center|center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -198,7 +200,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
+            android:gravity="start|fill_horizontal|end"
             android:orientation="horizontal"
             android:visibility="visible"
             tools:visibility="visible">
@@ -207,8 +209,9 @@
                 android:id="@+id/btVoltar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="33dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="20"
                 android:background="#CCCCCC"
                 android:onClick="voltar"
                 android:text="Voltar" />
@@ -217,8 +220,9 @@
                 android:id="@+id/btnExcluirModelo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="5dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_weight="20"
                 android:background="#E91E1E"
                 android:onClick="excluirAluno"
                 android:text="Excluir" />
@@ -227,13 +231,13 @@
                 android:id="@+id/btnSalvarModelo"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="5dp"
-                android:layout_marginRight="33dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="0dp"
+                android:layout_weight="20"
                 android:background="#9EA9E8"
                 android:onClick="salvarAluno"
                 android:text="Salvar" />
         </LinearLayout>
-
 
 
     </LinearLayout>

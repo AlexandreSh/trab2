@@ -35,36 +35,45 @@
         app:layout_constraintGuide_begin="216dp" />
 
 
-    <ListView
-        android:id="@+id/listAluno"
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="64dp"
-        android:layout_marginBottom="180dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
-        app:layout_constraintStart_toStartOf="@id/guideline3"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageButton
-        android:id="@+id/btnHomeAln"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription='iniciar'
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/guideline4"
-        app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toBottomOf="@+id/listAluno"
-        app:srcCompat="@drawable/baseline_home_24" />
-
-    <ImageButton
-        android:id="@+id/btnAddAln"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:contentDescription='novo aluno'
-        app:layout_constraintBottom_toBottomOf="@+id/btnHomeAln"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintStart_toStartOf="@+id/guideline4"
-        app:layout_constraintTop_toTopOf="@+id/btnHomeAln"
-        app:srcCompat="@drawable/baseline_playlist_add_24" />
+        app:layout_constraintStart_toStartOf="@+id/guideline3"
+        android:background="#FFE7FD"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ListView
+            android:id="@+id/listAluno"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="64dp"
+            android:layout_marginBottom="65dp"
+            android:background="#E6E9FB" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/btnHomeAln"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="30dp"
+                android:contentDescription='iniciar'
+                app:srcCompat="@drawable/baseline_home_24" />
+
+            <ImageButton
+                android:id="@+id/btnAddAln"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:contentDescription='novo aluno'
+                android:layout_marginLeft="30dp"
+                app:srcCompat="@drawable/baseline_playlist_add_24" />
+
+        </LinearLayout>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

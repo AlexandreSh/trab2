@@ -11,6 +11,7 @@ import android.widget.ListView;
 
 import com.example.trab2.database.CursosOnline;
 import com.example.trab2.databinding.ActivityAlunoListBinding;
+import com.example.trab2.entities.Aluno;
 import com.example.trab2.entities.AlunoCurso;
 
 import java.util.List;
@@ -18,7 +19,7 @@ import java.util.List;
 public class AlunoList extends AppCompatActivity {
     private ActivityAlunoListBinding binding;
     private CursosOnline db;
-    private List<AlunoCurso> alnCursos;
+    private List<Aluno> alnCursos;
     private ListView  listViewAluno;
     private Intent edtIntent;
 
@@ -54,13 +55,13 @@ public class AlunoList extends AppCompatActivity {
         preencheAlunos();
     }
     private void preencheAlunos(){
-        alnCursos = db.alunoCursoNome().getAllAlunoCurso();
-        ArrayAdapter<AlunoCurso> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alnCursos);
+        alnCursos = db.alunoNome().getAll();
+        ArrayAdapter<Aluno> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, alnCursos);
         listViewAluno.setAdapter(adapter);
         listViewAluno.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                AlunoCurso alunoSel = alnCursos.get(position);
+                Aluno alunoSel = alnCursos.get(position);
                 edtIntent.putExtra("ALUNO_SELECIONADO_ID", alunoSel.getAlunoID());
                 startActivity(edtIntent);
             }
